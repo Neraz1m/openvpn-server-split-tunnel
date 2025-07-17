@@ -1,4 +1,22 @@
-# d3vilh/openvpn-server
+# openvpn with split tunnel
+
+## What has changed?
+
+Based on the original openvpn-ui project, I changed the default subnet mask of the front-end(see [Neraz1m/openvpn-ui-split-tunnel: Web User Interface for OpenVPN, Split tunnel friendly.](https://github.com/Neraz1m/openvpn-ui-split-tunnel)) and back-end(see [Neraz1m/openvpn-server-split-tunnel: Fast Docker container with OpenVPN Server living inside, Split tunnel friendly.](https://github.com/Neraz1m/openvpn-server-split-tunnel)) from /24 to /16, which makes it easier to divide the network segments and use split tunnel to manage VPN, and change the default expiration time of all certificates and users to 3650 days.
+
+## How to use?
+
+The usage is similar to [d3vilh/openvpn-ui: Web User Interface for OpenVPN](https://github.com/d3vilh/openvpn-ui). The only difference is that you can choose the modified docker image of the front-end project or rebuild it using the source code of the front-end project([Neraz1m/openvpn-ui-split-tunnel: Web User Interface for OpenVPN, Split tunnel friendly.](https://github.com/Neraz1m/openvpn-ui-split-tunnel)). In the back-end, all available network segments are 10.1.0.0/16. You can also modify the parameters in server.conf to change to any network segment. Please note that since the front-end hard codes the subnet mask to 16-bit, if you want to use the 8-bit subnet mask, please modify the configuration file in staticclient to an 8-bit subnet mask after creating each vpn user.
+
+## TODO
+
+1. Allow the construction of any bit subnet mask in the front-end and change it in real time in the back-end
+
+2. Allow the adjustment of iptable in the front-end to more conveniently manage split tunnel
+
+3. Add VPN audit function
+
+## d3vilh/openvpn-server (Original README)
 Fast Docker container with OpenVPN Server living inside.
 
 [![latest version](https://img.shields.io/github/v/release/d3vilh/openvpn-server?color=%2344cc11&label=LATEST%20RELEASE&style=flat-square&logo=Github)](https://github.com/d3vilh/openvpn-server/releases/latest)  [![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/d3vilh/openvpn-server/latest?style=flat-square&logo=docker&logoColor=white&label=DOCKER%20IMAGE&color=2344cc11)](https://hub.docker.com/r/d3vilh/openvpn-server) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/d3vilh/openvpn-server/latest?logo=Docker&color=2344cc11&label=IMAGE%20SIZE&style=flat-square&logoColor=white)
